@@ -50,7 +50,7 @@ $(document).one("keypress", function () {
 });
 
 function checkAnswer(currentLevel) {
-  for (var i = 0; i <= currentLevel; i++) {
+  for (var i = 0; (i = currentLevel); i++) {
     if (userClickedPattern[i] === gamePattern[i]) {
       console.log(i);
     } else {
