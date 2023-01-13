@@ -4,6 +4,8 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
 
+var level = 0;
+
 // Generate random number to trigger the sequence
 // Button with animation and sound effect
 function nextSequence() {
@@ -15,8 +17,7 @@ function nextSequence() {
     .fadeOut(100)
     .fadeIn(100);
   playSound(randomChosenColour);
-  var level = level + 1;
-  $("#level-title").text("Level" + level);
+  $("#level-title").text("Level " + level);
 }
 
 // Button clicked by users
@@ -45,19 +46,17 @@ function animatePress(currentColour) {
 // Start the game
 $(document).one("keypress", function () {
   nextSequence();
-  var level = 0;
-  $("#level-title").text("Level " + level);
+  $("#level-title").text("Level 0");
 });
 
 function checkAnswer(currentLevel) {
-  for (var i = 0; (i = currentLevel); i++) {
-    if (userClickedPattern[i] === gamePattern[i]) {
-      console.log(i);
-    } else {
-      console.log("end game");
+  if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+    if (userClickedPattern.length === gamePattern.length) {
+      userClickedPattern = [];
+      level = level + 1;
+      setTimeout(nextSequence, 1000);
     }
-  }
-  if (i === currentLevel) {
-    setTimeout(nextSequence(), 5000);
+  } else {
+    console.log("end game");
   }
 }
